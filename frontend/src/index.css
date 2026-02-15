@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-text font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Form controls - use page font (Roboto) for consistency */
+  select,
+  input,
+  textarea {
+    font-family: inherit;
+    font-size: inherit;
+  }
+  
+  select option {
+    font-family: 'Roboto', ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-background-light;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/30 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
+  }
+}
+
+@layer components {
+  /* Glassmorphism card */
+  .glass-card {
+    @apply bg-background-light/40 backdrop-blur-md border border-white/10 rounded-xl shadow-xl;
+  }
+  
+  /* Neon glow effect */
+  .neon-glow {
+    @apply shadow-[0_0_20px_rgba(0,212,255,0.3)] hover:shadow-[0_0_30px_rgba(0,212,255,0.5)];
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent;
+  }
+  
+  /* Input field styles */
+  .input-field {
+    @apply w-full px-4 py-2 font-sans text-sm bg-background-light border border-white/10 rounded-lg 
+           text-text placeholder:text-text-muted
+           focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary
+           transition-all duration-200;
+  }
+  
+  /* Button styles */
+  .btn-primary {
+    @apply px-6 py-2 bg-gradient-to-r from-primary to-primary-dark 
+           text-white font-medium rounded-lg
+           hover:shadow-lg hover:shadow-primary/30
+           transition-all duration-200
+           active:scale-95;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-2 bg-background-light border border-primary/30 
+           text-primary font-medium rounded-lg
+           hover:bg-primary/10 hover:border-primary
+           transition-all duration-200
+           active:scale-95;
+  }
+  
+  /* Table styles */
+  .data-table {
+    @apply w-full border-collapse;
+  }
+  
+  .data-table th {
+    @apply px-4 py-3 text-left text-text-secondary text-sm font-medium 
+           bg-background-light/50 border-b border-white/10;
+  }
+  
+  .data-table td {
+    @apply px-4 py-3 text-text text-sm border-b border-white/5;
+  }
+  
+  .data-table tr:hover td {
+    @apply bg-background-light/30;
+  }
+  
+  /* Card styles */
+  .metric-card {
+    @apply glass-card p-6 space-y-2;
+  }
+  
+  .metric-value {
+    @apply text-3xl font-bold text-text;
+  }
+  
+  .metric-label {
+    @apply text-sm text-text-muted;
+  }
+  
+  .metric-change {
+    @apply text-sm font-medium;
+  }
+  
+  .metric-change.positive {
+    @apply text-functional-success;
+  }
+  
+  .metric-change.negative {
+    @apply text-functional-danger;
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .animate-delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animate-delay-300 {
+    animation-delay: 300ms;
+  }
+}
