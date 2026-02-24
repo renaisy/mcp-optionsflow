@@ -19,7 +19,8 @@ def _get_data_manager():
             from providers import DataSourceManager
             _data_manager = DataSourceManager(
                 alpha_vantage_key=os.getenv("ALPHA_VANTAGE_API_KEY"),
-                market_data_key=os.getenv("MARKET_DATA_API_KEY")
+                market_data_key=os.getenv("MARKET_DATA_API_KEY"),
+                finnhub_api_key=os.getenv("FINNHUB_API_KEY"),
             )
         except ImportError as e:
             logger.warning("Providers not available: %s", e)
@@ -179,6 +180,8 @@ def get_sources_status() -> Dict[str, Any]:
     # Fallback when providers not loaded
     fallback_providers = [
         {"name": "Yahoo Finance", "priority": 100, "is_available": True, "note": "Direct (primary)"},
+        {"name": "Finnhub", "priority": 95, "is_available": False, "note": "Stock quote - set FINNHUB_API_KEY (free at finnhub.io)"},
+        {"name": "FOC (NASDAQ)", "priority": 98, "is_available": False, "note": "Options from NASDAQ, no key - pip install freeoptionschain"},
         {"name": "MarketData.app", "priority": 90, "is_available": False, "note": "Not loaded - set MARKET_DATA_API_KEY"},
         {"name": "Alpha Vantage", "priority": 80, "is_available": False, "note": "Not loaded - set ALPHA_VANTAGE_API_KEY"},
         {"name": "AKShare", "priority": 50, "is_available": False, "note": "China ETF options (510050, 510300, etc.)"},

@@ -43,7 +43,7 @@ export const Header: React.FC = () => {
             onClick={() => navigate('/')}
           >
             <TrendingUp className="w-8 h-8 text-primary" />
-            <h1 className="text-xl font-bold gradient-text">OptionsFlow</h1>
+            <h1 className="text-xl font-bold gradient-text">海山云创OptionsFlow平台</h1>
           </div>
         </div>
 

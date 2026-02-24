@@ -175,7 +175,7 @@ export const Dashboard: React.FC = () => {
       {/* Header */}
       <div className="glass-card p-8">
         <h1 className="text-3xl font-bold text-text mb-2">
-          {t('dashboard.welcome')} <span className="gradient-text">OptionsFlow</span>
+          {t('dashboard.welcome')} <span className="gradient-text">海山云创OptionsFlow平台</span>
         </h1>
         <p className="text-text-secondary text-lg">{t('dashboard.subtitle')}</p>
       </div>

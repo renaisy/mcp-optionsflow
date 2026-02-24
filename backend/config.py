@@ -33,7 +33,7 @@ VERSION = "1.0.0"
 RATE_LIMIT_PER_MINUTE = 60
 
 # Cache settings - reduce external API calls on page refresh
-CACHE_TTL_STOCK = int(os.getenv("CACHE_TTL_STOCK", "300"))  # 5 min for stock/ETF info
+CACHE_TTL_STOCK = int(os.getenv("CACHE_TTL_STOCK", "600"))  # 10 min for stock/ETF info (reduce Yahoo rate limit)
 CACHE_TTL_OPTION_CHAIN = int(os.getenv("CACHE_TTL_OPTION_CHAIN", "180"))  # 3 min for option chain
 CACHE_TTL_EXPIRATIONS = int(os.getenv("CACHE_TTL_EXPIRATIONS", "600"))  # 10 min for exp dates
 CACHE_TTL_RATE = int(os.getenv("CACHE_TTL_RATE", "600"))  # 10 min for risk-free rate

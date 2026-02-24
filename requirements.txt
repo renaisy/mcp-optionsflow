@@ -19,6 +19,9 @@ sqlalchemy==2.0.25
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 
+# Environment
+python-dotenv>=1.0.0
+
 # Data validation
 pydantic==2.5.3
 pydantic-settings==2.1.0
@@ -27,6 +30,9 @@ email-validator==2.1.0
 # HTTP client
 httpx==0.26.0
 aiohttp>=3.9.0
+
+# Options data (NASDAQ, no API key) - 可选，若 pip 失败可试: pip install git+https://github.com/benjamincham/freeoptionschain.git
+# freeoptionschain>=0.8  # 仅支持 Python 3.6-3.9，新版 Python 请从 GitHub 安装
 
 # LLM / Agent
 openai>=1.0.0

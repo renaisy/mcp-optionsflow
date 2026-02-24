@@ -27,6 +27,12 @@ class MarketDataProvider(DataProvider):
         super().__init__("MarketData.app", priority=90)
         self.api_token = api_token or os.getenv("MARKET_DATA_API_KEY")
         self._rate_limit_cooldown = 60
+
+    def is_available(self) -> bool:
+        """Check if provider has API token and is not rate limited"""
+        if not self.api_token:
+            return False
+        return super().is_available()
     
     async def _make_request(self, endpoint: str) -> dict:
         """Make API request to MarketData.app"""
@@ -59,14 +65,19 @@ class MarketDataProvider(DataProvider):
                     except:
                         return {'raw': text}
     
+    def _norm_symbol(self, symbol: str) -> str:
+        """Strip ^ $ prefix for API path"""
+        s = symbol.strip().upper()
+        return s.lstrip("^$") if (s.startswith("^") or s.startswith("$")) else s
+
     async def get_stock_info(self, symbol: str) -> Optional[StockInfo]:
-        """Get stock information"""
+        """Get stock information. 指数 ^VIX 用 stocks/quotes/VIX 尝试（indices 免费版可能不可用）"""
         self._request_count += 1
         
         try:
-            # MarketData.app uses different endpoint format
-            # Try quotes endpoint first
-            data = await self._make_request(f"/stocks/quotes/{symbol.upper()}/")
+            norm_sym = self._norm_symbol(symbol)
+            # 统一使用 stocks 接口（indices 免费版返回 404）
+            data = await self._make_request(f"/stocks/quotes/{norm_sym}/")
             
             # MarketData returns array format (list of dicts)
             if isinstance(data, list) and len(data) > 0:
@@ -107,7 +118,8 @@ class MarketDataProvider(DataProvider):
         self._request_count += 1
         
         try:
-            data = await self._make_request(f"/options/expirations/{symbol.upper()}")
+            norm_sym = self._norm_symbol(symbol)
+            data = await self._make_request(f"/options/expirations/{norm_sym}")
             
             if isinstance(data, list):
                 # Convert to date strings
@@ -141,8 +153,9 @@ class MarketDataProvider(DataProvider):
         self._request_count += 1
         
         try:
+            norm_sym = self._norm_symbol(symbol)
             data = await self._make_request(
-                f"/options/chain/{symbol.upper()}/?expiration={expiration_date}"
+                f"/options/chain/{norm_sym}/?expiration={expiration_date}"
             )
             
             if not data or data.get('s') != 'ok':

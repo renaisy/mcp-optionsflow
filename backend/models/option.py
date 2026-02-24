@@ -15,7 +15,7 @@ class StockInfoResponse(BaseModel):
     dayHigh: Optional[float] = None
     dayLow: Optional[float] = None
     volume: Optional[int] = None
-    marketCap: Optional[int] = None
+    marketCap: Optional[float] = None  # 部分数据源返回 float，前端按 B/M 格式化显示
     dividendYield: Optional[float] = None
     fiftyTwoWeekHigh: Optional[float] = None
     fiftyTwoWeekLow: Optional[float] = None

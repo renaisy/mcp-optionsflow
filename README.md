@@ -20,7 +20,7 @@
 |----|------|
 | 后端 | FastAPI, SQLite, JWT, yfinance, Black-Scholes |
 | 前端 | React 18, TypeScript, Tailwind CSS, Zustand, Recharts, Plotly.js, react-markdown |
-| 数据源 | Yahoo Finance（主）, MarketData.app, Alpha Vantage, AKShare（中国 ETF） |
+| 数据源 | Yahoo Finance（主）, Finnhub, FOC/NASDAQ（期权）, MarketData.app, Alpha Vantage, AKShare（中国 ETF） |
 | Agent | OpenAI 兼容 API（OpenAI/GLM/Ollama/vLLM） |
 
 ## 项目结构
@@ -117,8 +117,13 @@ cd frontend && npm run dev
 ## 环境变量（可选）
 
 ```bash
-ALPHA_VANTAGE_API_KEY=xxx    # Alpha Vantage
+# 股票/期权数据源（Yahoo 为主，以下为备用）
+FINNHUB_API_KEY=xxx          # Finnhub 股票报价，免费 60 次/分钟，注册：https://finnhub.io/register
 MARKET_DATA_API_KEY=xxx      # MarketData.app
+ALPHA_VANTAGE_API_KEY=xxx    # Alpha Vantage
+
+# 期权数据：FOC（freeoptionschain）从 NASDAQ 获取，无需 API key
+#   pip install freeoptionschain   # 若失败（Python 3.10+），试: pip install git+https://github.com/benjamincham/freeoptionschain.git
 ```
 
 ## 许可证

@@ -1,12 +1,19 @@
 """
 OptionsFlow FastAPI Application Entry Point
 """
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+# 确保从项目根目录加载 .env（uvicorn 的 cwd 可能不同）
+_project_root = Path(__file__).resolve().parent.parent
+load_dotenv(_project_root / ".env")
+
 from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import sys
-import os
 import logging
 import traceback
 

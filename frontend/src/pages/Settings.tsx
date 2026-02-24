@@ -238,7 +238,7 @@ export const Settings: React.FC = () => {
           <section>
             <h2 className="text-lg font-semibold text-text mb-3">{t('settings.application')}</h2>
             <div className="glass-card p-4 space-y-2 text-text-secondary text-sm">
-              <p>OptionsFlow v1.0.0</p>
+              <p>海山云创OptionsFlow平台 v1.0.0</p>
               <p>Options strategy analysis platform with real-time data and visualization.</p>
             </div>
           </section>
